@@ -16,15 +16,13 @@ class SimpleHDLViewer
     typedef Cloud::ConstPtr CloudConstPtr;
 
 public:
-
     SimpleHDLViewer(pcl::Grabber &grabber, PointCloudColorHandler<pcl::PointXYZI> &handler);
 
-    void cloud_callback(const CloudConstPtr& cloud);
+    void cloud_callback(const CloudConstPtr &cloud);
 
     void run();
 
 private:
-
     PCLVisualizer::Ptr cloud_viewer_;
 
     pcl::Grabber &grabber_;

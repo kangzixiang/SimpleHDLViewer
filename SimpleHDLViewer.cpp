@@ -1,10 +1,9 @@
 #include "SimpleHDLViewer.h"
 
 SimpleHDLViewer::SimpleHDLViewer(pcl::Grabber &grabber,
-                  PointCloudColorHandler<pcl::PointXYZI> &handler) :
-                  cloud_viewer_(new PCLVisualizer("PCL HDL Cloud")),
-                  grabber_(grabber),
-                  handler_(handler)
+                                 PointCloudColorHandler<pcl::PointXYZI> &handler) : cloud_viewer_(new PCLVisualizer("PCL HDL Cloud")),
+                                                                                    grabber_(grabber),
+                                                                                    handler_(handler)
 {
 }
 
@@ -22,12 +21,13 @@ void SimpleHDLViewer::run()
     cloud_viewer_->setCameraPosition(0.0, 0.0, 30.0, 0.0, 1.0, 0.0, 0);
     cloud_viewer_->setCameraClipDistances(0.0, 50.0);
 
-    std::function<void (const CloudConstPtr&)> cloud_cb =
-        [this] (const CloudConstPtr &cloud) {cloud_callback(cloud);};
+    std::function<void(const CloudConstPtr &)> cloud_cb =
+        [this](const CloudConstPtr &cloud)
+    { cloud_callback(cloud); };
     boost::signals2::connection cloud_connection = grabber_.registerCallback(cloud_cb);
 
     grabber_.start();
-    
+
     while (!cloud_viewer_->wasStopped())
     {
         CloudConstPtr cloud;
